@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <conversionRule conversionWord="process_id"
+                    converterClass="co.uk.gel.logging.ProcessIdConverter" />
+    <define name="logLevel" class="co.uk.gel.logging.LoggingLevel"></define>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="co.uk.gel.logging.ExtendedPatternLayoutEncoder">
+            <Pattern>
+                %d{yyyy-MM-dd HH:mm:ss} - PID:%process_id -[%thread] %-5level %logger{20} - %msg%n
+            </Pattern>
+        </encoder>
+    </appender>
+
+    <logger name="co.uk.gel" level="${logLevel}"
+            additivity="false">
+        <appender-ref ref="STDOUT" />
+    </logger>
+
+
+</configuration>
