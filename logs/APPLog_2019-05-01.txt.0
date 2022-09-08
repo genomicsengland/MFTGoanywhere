@@ -1,0 +1,9 @@
+
+******* RUN STARTS Wed May 01 11:40:27 IST 2019 *******************************
+
+[@general] STARTED
+FEATURE: this is a sample feature
+Application is Up and Running.
+User login to application with valid credentials.
+User is in the Application Home Page!
+STATUS: PASSED

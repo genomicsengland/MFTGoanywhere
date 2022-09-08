@@ -1,0 +1,5 @@
+#APP URL (If we have more than one urls to be used, we have to add accordingly). Any modifications here accordingly incorporated in AppConfig.java
+APP_URL=https://applicationurl.com/
+APP_USERNAME=username
+APP_PASSWORD=password
+#ANY OTHER APP SPECIFIC CONFIGUTATIONS CAN BE ADDED HERE (LIKE LOCATIONS TO ANY DATA REFERENCE...)
