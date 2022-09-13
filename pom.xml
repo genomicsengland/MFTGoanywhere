@@ -9,7 +9,7 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>ProjectName</name>
+    <name>MFTGoanywhere</name>
     <url>http://maven.apache.org</url>
 
     <properties>
@@ -20,9 +20,112 @@
         <selenium.version>3.141.0</selenium.version>
         <junit.version>4.11</junit.version>
         <org.apache.poi.version>3.17</org.apache.poi.version>
+        <reportName>MFTGoanywhere</reportName>
+        <jsonFolder>target/cucumber-parallel</jsonFolder>
+        <rerunOption>No</rerunOption>
     </properties>
     <build>
         <plugins>
+            <plugin>
+                <groupId>com.github.temyers</groupId>
+                <artifactId>cucumber-jvm-parallel-plugin</artifactId>
+                <version>5.0.0</version>
+                <executions>
+                    <execution>
+                        <id>generateRunners</id>
+                        <phase>generate-test-resources</phase>
+                        <goals>
+                            <goal>generateRunners</goal>
+                        </goals>
+                        <configuration>
+                            <glue>
+                                <package>co.uk.gel.proj.steps</package>
+                            </glue>
+                            <featuresDirectory>src/test/Resources/features</featuresDirectory>
+                            <tags></tags>
+                            <cucumberOutputDir>target/cucumber-parallel</cucumberOutputDir>
+                            <outputDirectory>target/generated-test-sources</outputDirectory>
+                            <namingPattern>Parallel{c}IT</namingPattern>
+                            <parallelScheme>FEATURE</parallelScheme>
+                            <format>json,rerun</format>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.22.0</version>
+                <configuration>
+                    <forkCount>3</forkCount>
+                    <reuseForks>false</reuseForks>
+                    <systemPropertyVariables>
+                        <log4j2.formatMsgNoLookups>True</log4j2.formatMsgNoLookups>
+                    </systemPropertyVariables>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>Parallel Runners</id>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                        <configuration>
+                            <includes>
+                                <include>**/Parallel*IT.class</include>
+                            </includes>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>MergeFailureScenarios</id>
+                        <goals>
+                            <goal>integration-test</goal>
+                        </goals>
+                        <configuration>
+                            <includes>
+                                <include>**/MergeFailureRunner.class</include>
+                            </includes>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>Re-runFailedScenario</id>
+                        <goals>
+                            <goal>integration-test</goal>
+                        </goals>
+                        <configuration>
+                            <includes>
+                                <include>**/FailureScenariosRunner.class</include>
+                            </includes>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>verify</id>
+                        <goals>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.trivago.rta</groupId>
+                <artifactId>cluecumber-report-plugin</artifactId>
+                <version>2.7.1</version>
+                <executions>
+                    <execution>
+                        <id>report</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>reporting</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <expandBeforeAfterHooks>true</expandBeforeAfterHooks>
+                    <customPageTitle>${reportName}</customPageTitle>
+                    <sourceJsonReportDirectory>${project.build.directory}/cucumber-parallel</sourceJsonReportDirectory>
+                    <generatedHtmlReportDirectory>${project.build.directory}/test-report</generatedHtmlReportDirectory>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -37,29 +140,14 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.20</version>
                 <configuration>
+                    <excludes>
+                        <exclude>**/TestRunner.java</exclude>
+                    </excludes>
                     <testFailureIgnore>true</testFailureIgnore>
+                    <systemPropertyVariables>
+                        <rerunOption>${rerunOption}</rerunOption>
+                    </systemPropertyVariables>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>net.masterthought</groupId>
-                <artifactId>maven-cucumber-reporting</artifactId>
-                <version>3.13.0</version>
-                <executions>
-                    <execution>
-                        <id>execution</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <configuration>
-                            <projectName>ProjectName</projectName>
-                            <outputDirectory>${project.build.directory}</outputDirectory>
-                            <cucumberOutput>${project.build.directory}/cucumber.json</cucumberOutput>
-                            <parallelTesting>false</parallelTesting>
-                            <checkBuildResult>true</checkBuildResult>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
 
@@ -145,7 +233,7 @@
         <dependency>
             <groupId>net.masterthought</groupId>
             <artifactId>maven-cucumber-reporting</artifactId>
-            <version>2.4.0</version>
+            <version>5.6.1</version>
         </dependency>
         <!-- apache POI dependencies-->
         <dependency>
@@ -217,6 +305,39 @@
             <version>3.0.0</version>
             <scope>test</scope>
         </dependency>
+
+
+        <dependency>
+            <groupId>com.monitorjbl</groupId>
+            <artifactId>xlsx-streamer</artifactId>
+            <version>2.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-junit</artifactId>
+            <version>4.7.4</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-chrome-driver</artifactId>
+            <version>3.141.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-api</artifactId>
+            <version>3.141.0</version>
+            <scope>test</scope>
+        </dependency>
+
+
     </dependencies>
     <repositories>
         <repository>

@@ -515,42 +515,26 @@ public class SeleniumLib {
     }
     //   .................. upload file method.............
 
-    public static boolean upload(String path) {
-        WebElement element;
-        // Switch to newly opened window
-        for (String winHandle : driver.getWindowHandles()) {
-            driver.switchTo().window(winHandle);
-        }
-        sleep(2);
-        element = new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(By.id("file")));
-        if (element != null) {
-            element.click();
-        }
-        sleep(2);
-        //Copy file path to cllipboard
-        StringSelection ss = new StringSelection(path);
-        Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
-
-        //Java Robot commands to paste the clipboard copy on focused textbox
-        Robot robot = null;
+    public static boolean upload(By browse, String path) {
+        // creating object of Robot class
         try {
-            robot = new Robot();
+            Robot rb = new Robot();
 
-            robot.keyPress(KeyEvent.VK_CONTROL);
-            robot.keyPress(KeyEvent.VK_V);
-            robot.keyRelease(KeyEvent.VK_V);
-            robot.keyRelease(KeyEvent.VK_CONTROL);
-            robot.keyPress(KeyEvent.VK_ENTER);
-            robot.keyRelease(KeyEvent.VK_ENTER);
-            sleep(2);
-            element = new WebDriverWait(driver, 10)
-                    .until(ExpectedConditions.presenceOfElementLocated(By.xpath("html/body/form/div/p/input[1]")));
-            element.click();
-            sleep(2);
-            element = new WebDriverWait(driver, 10)
-                    .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@value='Close Window']")));
-            element.click();
-            sleep(2);
+            // copying File path to Clipboard
+            StringSelection str = new StringSelection(path);
+            Toolkit.getDefaultToolkit().getSystemClipboard().setContents(str, null);
+
+            // press Contol+V for pasting
+            rb.keyPress(KeyEvent.VK_CONTROL);
+            rb.keyPress(KeyEvent.VK_V);
+
+            // release Contol+V for pasting
+            rb.keyRelease(KeyEvent.VK_CONTROL);
+            rb.keyRelease(KeyEvent.VK_V);
+
+            // for pressing and releasing Enter
+            rb.keyPress(KeyEvent.VK_ENTER);
+            rb.keyRelease(KeyEvent.VK_ENTER);
             return true;
         } catch (Exception exp) {
             Debugger.println("Upload Exception from SeleniumLib: " + exp);
