@@ -138,4 +138,88 @@ public class AppStepDefs extends Pages {
         reFindingsPage.setTransfer(value);
     }
 
+    @And("the user selects Diagnostic Discovery form")
+    public void theUserSelectsDiagnosticDiscoveryForm() {
+        diagnosticDiscoveryPage.selectDiagnosticDiscoveryForms();
+    }
+
+    @And("^the user sets Diagnostic UserGroup to (.+)$")
+    public void theUserSetsDiagnosticUserGroupToUserGroup(String value) {
+        diagnosticDiscoveryPage.setUserGroupValue(value);
+    }
+
+    @And("^the user sets Diagnostic Research Registry ID to (.+)$")
+    public void theUserSetsDiagnosticResearchRegistryIDToRegistryID(String value) {
+        diagnosticDiscoveryPage.setRegistryID(value);
+    }
+
+    @And("^the user sets Diagnostic expertise to (.+)$")
+    public void theUserSetsDiagnosticExpertiseToExpertise(String value) {
+        diagnosticDiscoveryPage.setExpertise(value);
+    }
+
+    @And("^the user sets Diagnostic contact with clinical team to (.+)$")
+    public void theUserSetsDiagnosticContactWithClinicalTeamToContact(String value) {
+        diagnosticDiscoveryPage.setContactClinicalTeamDropDownValue(value);
+    }
+
+    @And("^user sets Diagnostic report potentially diagnostic variant to (.+)$")
+    public void userSetsDiagnosticReportPotentiallyDiagnosticVariantToReport(String value) {
+        diagnosticDiscoveryPage.setReportPotentialVariantDropDownValue(value);
+    }
+
+    @And("^user sets Diagnostic participant ids and variants to (.+)$")
+    public void userSetsDiagnosticParticipantIdsAndVariantsToPartcipantIDsAndVariants(String value) {
+        diagnosticDiscoveryPage.setParticipantIDandVariantsTextBox(value);
+    }
+
+    @And("^user sets Diagnostic Genome build to (.+)$")
+    public void userSetsDiagnosticGenomeBuildToGenomeBuild(String value) {
+        diagnosticDiscoveryPage.setGenomeBuildDropDownValue(value);
+    }
+
+    @And("the user selects GeneMatcher request form")
+    public void theUserSelectsGeneMatcherRequestForm() {
+        geneMatcherPage.selectGeneMatcherForms();
+    }
+
+    @And("^the user sets GeneMatcher UserGroup to (.+)$")
+    public void theUserSetsGeneMatcherUserGroupToUserGroup(String value) {
+        geneMatcherPage.setUserGroupValue(value);
+    }
+
+    @And("^the user sets GeneMatcher Gene Symbol to (.+)$")
+    public void theUserSetsGeneMatcherGeneSymbolToGeneSymbol(String value) {
+        geneMatcherPage.setGeneSymbol(value);
+    }
+
+    @And("^the user sets GeneMatcher Zygosity to (.+)$")
+    public void theUserSetsGeneMatcherZygosityToZygosity(String value) {
+        geneMatcherPage.setZygosityValue(value);
+    }
+
+    @And("^the user sets GeneMatcher Function to (.+)$")
+    public void theUserSetsGeneMatcherFunctionToFunction(String value) {
+        geneMatcherPage.setFunction(value);
+    }
+
+    @And("^the user sets GeneMatcher Inheritance model to (.+)$")
+    public void theUserSetsGeneMatcherInheritanceModelToInheritanceModel(String value) {
+        geneMatcherPage.setInheritanceModel(value);
+    }
+
+    @And("^the user sets GeneMatcher Phenotype term to (.+)$")
+    public void theUserSetsGeneMatcherPhenotypeTermToPhenotypeTerm(String value) {
+        geneMatcherPage.setPhenotypeTerm(value);
+    }
+
+    @And("^the user sets GeneMatcher PartcipantID to (.+)$")
+    public void theUserSetsGeneMatcherPartcipantIDToParticipantID(String value) {
+        geneMatcherPage.setFile(value);
+    }
+
+    @And("^the user sets GeneMatcher Transfer Agreement to (.+)$")
+    public void theUserSetsGeneMatcherTransferAgreementToAgreement(String value) {
+        geneMatcherPage.setTransfer(value);
+    }
 }//end

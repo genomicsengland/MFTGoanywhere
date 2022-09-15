@@ -24,7 +24,7 @@ public class AnalysisScriptAndSoftwarePage {
     By ProgrammingLanguageDropDown = By.xpath("//label[@id='secureForm:formPanel:rows:17:columns:0:dropdown_label']");
     By TransferDropDown = By.xpath("//label[@id='secureForm:formPanel:rows:24:columns:0:dropdown_label']");
     By submitButton = By.xpath("//span[normalize-space()='Submit']");
-    By successMessage = By.xpath("//span[contains(text(),'Airlock request successfully submitted.')]");
+    By successMessage = By.xpath("//span[contains(text(),'successfully')]");
 
     public AnalysisScriptAndSoftwarePage(WebDriver driver) {
         this.driver = driver;
@@ -60,7 +60,7 @@ public class AnalysisScriptAndSoftwarePage {
         seleniumLib.clickOnElement(UserGroupDropDown);
         seleniumLib.sleepInSeconds(2);
         seleniumLib.clickOnElement( By.xpath("//td[normalize-space()='"+userGroup+"']"));
-        seleniumLib.sleepInSeconds(10);
+        seleniumLib.sleepInSeconds(2);
         } catch (Exception exp) {
             exp.printStackTrace();
             Debugger.println("EXCEPTION is Found in setUserGroupValue " + exp);
@@ -154,7 +154,7 @@ public class AnalysisScriptAndSoftwarePage {
             seleniumLib.clickOnElement(submitButton);
             seleniumLib.sleepInSeconds(2);
             seleniumLib.waitForElementVisible(successMessage);
-            seleniumLib.sleepInSeconds(2);
+            seleniumLib.sleepInSeconds(5);
         } catch (Exception exp) {
             exp.printStackTrace();
             Debugger.println("EXCEPTION is Found in submitButton " + exp);

@@ -1,8 +1,8 @@
 @GoAnywhere
-@GoAnywhere_2
-Feature: Contract Research Organisation Feature
+@RPDS-4824
+Feature: AnalysisScriptsAndSoftware Feature
 
-  Scenario Outline: Contract Research Organisation scenario
+  Scenario Outline: AnalysisScriptsAndSoftware scenario
 
     Given the user launches the GoAnywhere application
     And the user is logged into GoAnywhere

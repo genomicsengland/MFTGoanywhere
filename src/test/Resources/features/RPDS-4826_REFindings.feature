@@ -1,5 +1,5 @@
 @GoAnywhere
-@GoAnywhere_4
+@RPDS-4826
 Feature: RE Findings Form
 
   Scenario Outline: RE Findings scenario

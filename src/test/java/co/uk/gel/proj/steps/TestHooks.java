@@ -49,6 +49,6 @@ public class TestHooks  extends Pages {
     }
     @After(order=1)
     public void afterScenario(){
-        //login_page.logoutFromMI();
+        appHomePage.logout();
     }
 }//end class

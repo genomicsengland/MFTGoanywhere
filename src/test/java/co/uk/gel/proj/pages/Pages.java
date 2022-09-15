@@ -13,6 +13,8 @@ public class Pages {
     protected AnalysisScriptAndSoftwarePage analysisScriptAndSoftwarePage;
     protected ContractResearchOrganisationPage contractResearchOrganisationPage;
     protected REFindingsPage reFindingsPage;
+    protected DiagnosticDiscoveryPage diagnosticDiscoveryPage;
+    protected GeneMatcherPage geneMatcherPage;
 
     public Pages(SeleniumDriver driver) {
         this.driver = driver;
@@ -24,5 +26,7 @@ public class Pages {
         analysisScriptAndSoftwarePage = PageFactory.initElements(driver, AnalysisScriptAndSoftwarePage.class);
         contractResearchOrganisationPage = PageFactory.initElements(driver,ContractResearchOrganisationPage.class);
         reFindingsPage = PageFactory.initElements(driver,REFindingsPage.class);
+        diagnosticDiscoveryPage = PageFactory.initElements(driver,DiagnosticDiscoveryPage.class);
+        geneMatcherPage = PageFactory.initElements(driver,GeneMatcherPage.class);
     }
 }//end class

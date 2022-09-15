@@ -54,4 +54,23 @@ public class AppHomePage {
             Assert.assertTrue("EXCEPTION is Found in loginToGoAnywhere", false);
         }
     }
+
+    public void logout()
+    {
+        By accountLink = By.xpath("//a[@id='accountLink']");
+        By logOut = By.xpath("//a[@id='logoutLink']");
+        try {
+            seleniumLib.highLightElement(accountLink);
+            seleniumLib.highLightElement(logOut);
+            if (!seleniumLib.isElementPresent(logOut)) {
+                seleniumLib.sleepInSeconds(2);
+                seleniumLib.waitForElementVisible(logOut);
+            }
+            seleniumLib.sleepInSeconds(2);
+            seleniumLib.clickOnElement(logOut);
+        } catch (Exception exp) {
+            Debugger.println("logout buttton is not available:" +exp);
+        }
+
+    }
 }
